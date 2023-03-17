@@ -1,35 +1,26 @@
-# nextjs-template
+# toml-yaml-json-xml
 
-🌰🌰🌰 Next.jsのテンプレートです。  
-よく使用すると思われる`Bootstrap`と`SCSS`は既にインストールしてあります。  
+以下の4つのフォーマットを相互に変換するツールです。  
+
+- TOML
+- YAML
+- JSON
+- XML
 
 ## 実行方法
 
 ```shell
-# モジュールのインストール
-yarn
-
-# 開発用実行
+yarn install
 yarn dev
-
-# ビルド
-yarn build
 ```
 
-## CI/CD
+## デプロイ方法
 
-`GitHub Actions`を使用しています。  
-`main`ブランチにマージされると自動でデプロイされます。  
+GitHub Actionsにより、mainブランチにpushされると自動的にデプロイされます。  
+GitHub Pagesを有効にします。  
 
-## GitHubシークレットの設定
+ローカルでビルドしたい場合は、以下のコマンドを実行してください。  
 
-GitHub Actionsで使用するシークレットを設定します。  
-これは、GitHubのリポジトリの`Settings`→`Secrets`から設定できます。  
-Depricatedなパッケージを使用している場合にその旨を通知します。  
-
-`Develop`ブランチでは自動でパッケージの更新を行います。  
-これはマイナーバージョンの更新のみです。  
-
-| シークレット名 | 説明 |
-| --- | --- |
-| SLACK_WEBHOOK_URL | SlackのWebhook URL |
+```shell
+yarn build
+```
