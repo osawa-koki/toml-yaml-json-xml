@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 import { useState } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@splidejs/react-splide/css';
 
 import '../styles/styles.scss';
 import '../styles/menu.scss';

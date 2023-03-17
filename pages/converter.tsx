@@ -1,11 +1,43 @@
 import React, { useState } from "react";
 
 import { Button, Alert, Form } from 'react-bootstrap';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Layout from "../components/Layout";
 
 import { DataContext } from "../src/DataContext";
 
 type toml_yaml_json_xml = 'toml' | 'yaml' | 'json' | 'xml' | null;
+
+type DataTypeStruct = {
+  key: string;
+  func: (input: string) => string;
+};
+const data: DataTypeStruct[] = [
+  {
+    key: 'toml',
+    func: (input: string) => {
+      return input;
+    },
+  },
+  {
+    key: 'yaml',
+    func: (input: string) => {
+      return input;
+    },
+  },
+  {
+    key: 'json',
+    func: (input: string) => {
+      return input;
+    },
+  },
+  {
+    key: 'xml',
+    func: (input: string) => {
+      return input;
+    },
+  },
+];
 
 export default function ContactPage() {
 
@@ -19,7 +51,7 @@ export default function ContactPage() {
         <Form>
           <Form.Group>
             <Form.Label>Input</Form.Label>
-            <Form.Control as="textarea" rows={7} />
+            <Form.Control as="textarea" rows={10} />
           </Form.Group>
           <Form.Group className="mt-3">
             {['toml', 'yaml', 'json', 'xml'].map((type: toml_yaml_json_xml) => (
@@ -34,6 +66,18 @@ export default function ContactPage() {
             ))}
           </Form.Group>
         </Form>
+        <Splide className="mt-5">
+          {
+            data.map((d: DataTypeStruct) => {
+              return (
+                <SplideSlide key={d.key}>
+                  <h2>{d.key}</h2>
+                  <Form.Control as="textarea" rows={10} />
+                </SplideSlide>
+              );
+            })
+          }
+        </Splide>
       </div>
     </Layout>
   );
