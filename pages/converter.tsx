@@ -126,6 +126,16 @@ export default function ContactPage() {
             ))}
           </Form.Group>
         </Form>
+        {
+          data_fromA?.func(content) === null && (
+            <Alert variant="danger" className="mt-3">
+              <Alert.Heading>Invalid input</Alert.Heading>
+              <p>
+                The input is not valid for the selected type.
+              </p>
+            </Alert>
+          )
+        }
         <Splide className="mt-5">
           {
             toA.map((d: IToA) => {
