@@ -143,13 +143,25 @@ export default function ContactPage() {
             </Alert>
           )
         }
-        <Splide className="mt-5">
+        <Splide
+          options={{
+            type: 'loop',
+            perPage: 1,
+            perMove: 1,
+            gap: '1rem',
+            pagination: false,
+            arrows: false,
+            autoplay: true,
+            interval: 5000,
+          }}
+          className="mt-5"
+        >
           {
             toA.map((d: IToA) => {
               return (
                 <>
                   <SplideSlide key={d.key}>
-                    <h2>{d.key}</h2>
+                    <h2>{d.key} | &lt; --- slide --- &gt;</h2>
                     <Form.Control as="textarea" rows={10} style={{width: 'calc(100% - 1rem)',height: 'calc(100% - 10rem)'}} className="d-block m-auto" value={
                       (() => {
                         if (data_fromA == null) return '';
