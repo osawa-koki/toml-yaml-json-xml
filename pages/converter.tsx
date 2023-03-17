@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import * as toml from '@iarna/toml';
 import * as yaml from 'js-yaml';
-import { parseString } from 'xml2js';
+import * as xml2js from 'xml2js';
 
 import { Button, Alert, Form } from 'react-bootstrap';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
@@ -12,12 +12,13 @@ import { DataContext } from "../src/DataContext";
 
 type IFromA = {
   key: string;
-  func: (input: string) => any | null;
+  // eslint-disable-next-line no-unused-vars
+  func: (_a: string) => any | null;
 };
 const fromA: IFromA[] = [
   {
     key: 'toml',
-    func: (input: string) => {
+    func: (input: string): any => {
       try {
         return toml.parse(input);
       } catch (e) {
@@ -27,7 +28,7 @@ const fromA: IFromA[] = [
   },
   {
     key: 'yaml',
-    func: (input: string) => {
+    func: (input: string): any => {
       try {
         return yaml.load(input);
       } catch (e) {
@@ -47,10 +48,10 @@ const fromA: IFromA[] = [
   },
   {
     key: 'xml',
-    func: (input: string) => {
+    func: (input: string): any => {
       try {
         let obj: any = null;
-        parseString(input, (err: any, result: any) => {
+        xml2js.parseString(input, (err: any, result: any) => {
           if (err) {
             throw err;
           }
@@ -66,12 +67,13 @@ const fromA: IFromA[] = [
 
 type IToA = {
   key: string;
-  func: (input: any) => string;
+  // eslint-disable-next-line no-unused-vars
+  func: (_a: any) => string;
 };
 const toA: IToA[] = [
   {
     key: 'toml',
-    func: (input: any) => {
+    func: (input: any): string => {
       return toml.stringify(input);
     },
   },
@@ -83,14 +85,15 @@ const toA: IToA[] = [
   },
   {
     key: 'json',
-    func: (input: any) => {
+    func: (input: any): string => {
       return JSON.stringify(input);
     },
   },
   {
     key: 'xml',
-    func: (input: string) => {
-      return input;
+    func: (input: any): string => {
+      const builder = new xml2js.Builder();
+      return builder.buildObject(input);
     },
   },
 ];
@@ -134,13 +137,12 @@ export default function ContactPage() {
                       if (data_fromA == null) return '';
                       try {
                         const obj = data_fromA.func(content);
-                        console.log(obj);
                         return d.func(obj);
                       } catch (e) {
                         return e.message;
                       }
                     })()
-                  } />
+                  } readOnly />
                 </SplideSlide>
               );
             })
