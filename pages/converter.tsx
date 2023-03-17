@@ -98,7 +98,17 @@ const toA: IToA[] = [
 
 export default function ContactPage() {
 
-  const [content, setContent] = useState<string>('');
+  const [content, setContent] = useState<string>(JSON.stringify({
+    'programming_language': 'TypeScript',
+    'is_object_oriented': true,
+    'is_functional': true,
+    'is_prototype_based': true,
+    'similar_languages': [
+      'C#',
+      'Python',
+      'Ruby',
+    ],
+  }, null, 2));
   const [data_fromA, setDataFromA] = useState<IFromA>();
   const [copy, setCopy] = useState<boolean>(false);
 
