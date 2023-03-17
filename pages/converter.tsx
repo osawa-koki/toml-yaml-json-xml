@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+import * as toml from 'toml';
+import * as yaml from 'js-yaml';
+import { parseString } from 'xml2js';
+
 import { Button, Alert, Form } from 'react-bootstrap';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Layout from "../components/Layout";
@@ -8,31 +12,52 @@ import { DataContext } from "../src/DataContext";
 
 type IFromA = {
   key: string;
-  func: (input: string) => any;
+  func: (input: string) => any | null;
 };
 const fromA: IFromA[] = [
   {
     key: 'toml',
     func: (input: string) => {
-      return input;
+      try {
+        return toml.parse(input);
+      } catch (e) {
+        return null;
+      }
     },
   },
   {
     key: 'yaml',
     func: (input: string) => {
-      return input;
+      try {
+        return yaml.load(input);
+      } catch (e) {
+        return null;
+      }
     },
   },
   {
     key: 'json',
     func: (input: string): any => {
-      return JSON.parse(input);
+      try {
+        return JSON.parse(input);
+      } catch (e) {
+        return null;
+      }
     },
   },
   {
     key: 'xml',
-    func: (input: string) => {
-      return input;
+    func: async (input: string) => {
+      const a = await new Promise((resolve, reject) => {
+        parseString(input, (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        });
+      });
+      return a;
     },
   },
 ];
@@ -106,7 +131,9 @@ export default function ContactPage() {
                     (() => {
                       if (data_fromA == null) return '';
                       try {
-                        return d.func(data_fromA.func(content));
+                        const obj = data_fromA.func(content);
+                        console.log(obj);
+                        return d.func(obj);
                       } catch (e) {
                         return e.message;
                       }
