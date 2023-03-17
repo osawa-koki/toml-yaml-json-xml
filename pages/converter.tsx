@@ -159,10 +159,21 @@ export default function ConverterPage() {
           {
             toA.map((d: IToA) => {
               return (
-                <>
-                  <SplideSlide key={d.key}>
-                    <h2>{d.key} | &lt; --- slide --- &gt;</h2>
-                    <Form.Control as="textarea" rows={10} style={{width: 'calc(100% - 1rem)',height: 'calc(100% - 10rem)'}} className="d-block m-auto" value={
+                <SplideSlide key={d.key}>
+                  <h2>{d.key} | &lt; --- slide --- &gt;</h2>
+                  <Form.Control as="textarea" rows={10} style={{width: 'calc(100% - 1rem)',height: 'calc(100% - 10rem)'}} className="d-block m-auto" value={
+                    (() => {
+                      if (data_fromA == null) return '';
+                      try {
+                        const obj = data_fromA.func(content);
+                        return d.func(obj);
+                      } catch (e) {
+                        return e.message;
+                      }
+                    })()
+                  } readOnly />
+                  <Button variant="primary" className="d-block m-auto mt-3" onClick={async () => {
+                    navigator.clipboard.writeText(
                       (() => {
                         if (data_fromA == null) return '';
                         try {
@@ -172,25 +183,12 @@ export default function ConverterPage() {
                           return e.message;
                         }
                       })()
-                    } readOnly />
-                    <Button variant="primary" className="d-block m-auto mt-3" onClick={async () => {
-                      navigator.clipboard.writeText(
-                        (() => {
-                          if (data_fromA == null) return '';
-                          try {
-                            const obj = data_fromA.func(content);
-                            return d.func(obj);
-                          } catch (e) {
-                            return e.message;
-                          }
-                        })()
-                      );
-                      setCopy(true);
-                      await new Promise((resolve) => setTimeout(resolve, 1000));
-                      setCopy(false);
-                    }}>{ copy ? 'Copied' : 'Copy 🖋' }</Button>
-                  </SplideSlide>
-                </>
+                    );
+                    setCopy(true);
+                    await new Promise((resolve) => setTimeout(resolve, 1000));
+                    setCopy(false);
+                  }}>{ copy ? 'Copied' : 'Copy 🖋' }</Button>
+                </SplideSlide>
               );
             })
           }
