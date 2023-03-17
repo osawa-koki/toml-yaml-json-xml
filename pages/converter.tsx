@@ -96,7 +96,7 @@ const toA: IToA[] = [
   },
 ];
 
-export default function ContactPage() {
+export default function ConverterPage() {
 
   const [content, setContent] = useState<string>(JSON.stringify({
     'programming_language': 'TypeScript',
