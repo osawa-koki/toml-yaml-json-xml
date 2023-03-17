@@ -8,11 +8,11 @@ import { DataContext } from "../src/DataContext";
 
 type toml_yaml_json_xml = 'toml' | 'yaml' | 'json' | 'xml' | null;
 
-type DataTypeStruct = {
+type IToA = {
   key: string;
   func: (input: string) => string;
 };
-const data: DataTypeStruct[] = [
+const toA: IToA[] = [
   {
     key: 'toml',
     func: (input: string) => {
@@ -68,7 +68,7 @@ export default function ContactPage() {
         </Form>
         <Splide className="mt-5">
           {
-            data.map((d: DataTypeStruct) => {
+            toA.map((d: IToA) => {
               return (
                 <SplideSlide key={d.key}>
                   <h2>{d.key}</h2>
