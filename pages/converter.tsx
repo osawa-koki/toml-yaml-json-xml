@@ -109,7 +109,7 @@ export default function ConverterPage() {
       'Ruby',
     ],
   }, null, 2));
-  const [data_fromA, setDataFromA] = useState<IFromA>();
+  const [data_fromA, setDataFromA] = useState<IFromA>(fromA[2]);
   const [copy, setCopy] = useState<boolean>(false);
 
   return (
@@ -127,8 +127,9 @@ export default function ConverterPage() {
                 label={_fromA.key}
                 name="input_type"
                 type='radio'
+                checked={data_fromA?.key === _fromA.key}
                 inline
-                onInput={() => { setDataFromA(_fromA); }}
+                onChange={() => { setDataFromA(_fromA); }}
               />
             ))}
           </Form.Group>
