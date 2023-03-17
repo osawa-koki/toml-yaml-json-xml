@@ -8,8 +8,6 @@ import { Button, Alert, Form } from 'react-bootstrap';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Layout from "../components/Layout";
 
-import { DataContext } from "../src/DataContext";
-
 type IFromA = {
   key: string;
   // eslint-disable-next-line no-unused-vars
@@ -99,8 +97,6 @@ const toA: IToA[] = [
 ];
 
 export default function ContactPage() {
-
-  const { sharedData, setSharedData } = React.useContext(DataContext);
 
   const [content, setContent] = useState<string>('');
   const [data_fromA, setDataFromA] = useState<IFromA>();
