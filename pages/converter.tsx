@@ -6,7 +6,36 @@ import Layout from "../components/Layout";
 
 import { DataContext } from "../src/DataContext";
 
-type toml_yaml_json_xml = 'toml' | 'yaml' | 'json' | 'xml' | null;
+type IFromA = {
+  key: string;
+  func: (input: string) => string;
+};
+const fromA: IFromA[] = [
+  {
+    key: 'toml',
+    func: (input: string) => {
+      return input;
+    },
+  },
+  {
+    key: 'yaml',
+    func: (input: string) => {
+      return input;
+    },
+  },
+  {
+    key: 'json',
+    func: (input: string) => {
+      return input;
+    },
+  },
+  {
+    key: 'xml',
+    func: (input: string) => {
+      return input;
+    },
+  },
+];
 
 type IToA = {
   key: string;
@@ -43,7 +72,8 @@ export default function ContactPage() {
 
   const { sharedData, setSharedData } = React.useContext(DataContext);
 
-  const [data_type, setDataType] = useState<toml_yaml_json_xml>(null);
+  const [content, setContent] = useState<string>('');
+  const [data_fromA, setDataFromA] = useState<IFromA>(fromA[0]);
 
   return (
     <Layout>
@@ -51,17 +81,17 @@ export default function ContactPage() {
         <Form>
           <Form.Group>
             <Form.Label>Input</Form.Label>
-            <Form.Control as="textarea" rows={10} />
+            <Form.Control as="textarea" rows={10} value={content} onInput={(e) => {setContent(e.currentTarget.value)}} />
           </Form.Group>
           <Form.Group className="mt-3">
-            {['toml', 'yaml', 'json', 'xml'].map((type: toml_yaml_json_xml) => (
+            {fromA.map((_fromA: IFromA) => (
               <Form.Check
-                key={type}
-                label={type}
+                key={_fromA.key}
+                label={_fromA.key}
                 name="input_type"
                 type='radio'
                 inline
-                onInput={() => { setDataType(type) }}
+                onInput={() => { setDataFromA(_fromA); }}
               />
             ))}
           </Form.Group>
