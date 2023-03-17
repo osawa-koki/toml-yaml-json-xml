@@ -70,25 +70,25 @@ type IToA = {
 };
 const toA: IToA[] = [
   {
-    key: 'toml',
+    key: '🐟 toml',
     func: (input: any): string => {
       return toml.stringify(input);
     },
   },
   {
-    key: 'yaml',
+    key: '🐙 yaml',
     func: (input: any): string => {
       return yaml.dump(input);
     },
   },
   {
-    key: 'json',
+    key: '🐸 json',
     func: (input: any): string => {
       return JSON.stringify(input, null, 2);
     },
   },
   {
-    key: 'xml',
+    key: '🦒 xml',
     func: (input: any): string => {
       const builder = new xml2js.Builder();
       return builder.buildObject(input);
