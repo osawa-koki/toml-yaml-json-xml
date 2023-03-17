@@ -1,11 +1,6 @@
 # toml-yaml-json-xml
 
-🐆🐆🐆 以下の4つのフォーマットを相互に変換するツールです。  
-
-- TOML
-- YAML
-- JSON
-- XML
+🐆🐆🐆 `TOML` `YAML` `JSON` `XML`を相互変換できるサイトです。  
 
 ## 実行方法
 
