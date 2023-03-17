@@ -47,18 +47,20 @@ const fromA: IFromA[] = [
   },
   {
     key: 'xml',
-    func: async (input: string) => {
-      const a = await new Promise((resolve, reject) => {
-        parseString(input, (err, result) => {
+    func: (input: string) => {
+      try {
+        let obj: any = null;
+        parseString(input, (err: any, result: any) => {
           if (err) {
-            reject(err);
-          } else {
-            resolve(result);
+            throw err;
           }
+          obj = result;
         });
-      });
-      return a;
-    },
+        return obj;
+      } catch (e) {
+        return null;
+      }
+    }
   },
 ];
 
