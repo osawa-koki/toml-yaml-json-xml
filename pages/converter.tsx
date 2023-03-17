@@ -84,7 +84,7 @@ const toA: IToA[] = [
   {
     key: 'json',
     func: (input: any): string => {
-      return JSON.stringify(input);
+      return JSON.stringify(input, null, 2);
     },
   },
   {
