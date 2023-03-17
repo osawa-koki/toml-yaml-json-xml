@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import * as toml from 'toml';
+import * as toml from '@iarna/toml';
 import * as yaml from 'js-yaml';
 import { parseString } from 'xml2js';
 
@@ -69,14 +69,14 @@ type IToA = {
 const toA: IToA[] = [
   {
     key: 'toml',
-    func: (input: string) => {
-      return input;
+    func: (input: any) => {
+      return toml.stringify(input);
     },
   },
   {
     key: 'yaml',
-    func: (input: string) => {
-      return input;
+    func: (input: any): string => {
+      return yaml.dump(input);
     },
   },
   {
