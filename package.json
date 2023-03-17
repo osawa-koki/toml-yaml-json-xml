@@ -1,12 +1,12 @@
 {
-  "name": "nextjs-template",
+  "name": "toml-yaml-json-xml",
   "description": "My favorite Next.js project",
   "version": "1.0.0",
   "author": "osawa-koki",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/osawa-koki/nextjs-template.git"
+    "url": "https://github.com/osawa-koki/toml-yaml-json-xml.git"
   },
   "engines": {
     "node": ">=16.0.0",
