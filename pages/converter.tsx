@@ -8,7 +8,7 @@ import { DataContext } from "../src/DataContext";
 
 type IFromA = {
   key: string;
-  func: (input: string) => string;
+  func: (input: string) => any;
 };
 const fromA: IFromA[] = [
   {
@@ -25,8 +25,8 @@ const fromA: IFromA[] = [
   },
   {
     key: 'json',
-    func: (input: string) => {
-      return input;
+    func: (input: string): any => {
+      return JSON.parse(input);
     },
   },
   {
@@ -39,7 +39,7 @@ const fromA: IFromA[] = [
 
 type IToA = {
   key: string;
-  func: (input: string) => string;
+  func: (input: any) => string;
 };
 const toA: IToA[] = [
   {
@@ -56,8 +56,8 @@ const toA: IToA[] = [
   },
   {
     key: 'json',
-    func: (input: string) => {
-      return input;
+    func: (input: any) => {
+      return JSON.stringify(input);
     },
   },
   {
@@ -73,7 +73,7 @@ export default function ContactPage() {
   const { sharedData, setSharedData } = React.useContext(DataContext);
 
   const [content, setContent] = useState<string>('');
-  const [data_fromA, setDataFromA] = useState<IFromA>(fromA[0]);
+  const [data_fromA, setDataFromA] = useState<IFromA>();
 
   return (
     <Layout>
@@ -102,7 +102,16 @@ export default function ContactPage() {
               return (
                 <SplideSlide key={d.key}>
                   <h2>{d.key}</h2>
-                  <Form.Control as="textarea" rows={10} />
+                  <Form.Control as="textarea" rows={10} value={
+                    (() => {
+                      if (data_fromA == null) return '';
+                      try {
+                        return d.func(data_fromA.func(content));
+                      } catch (e) {
+                        return e.message;
+                      }
+                    })()
+                  } />
                 </SplideSlide>
               );
             })
