@@ -140,20 +140,22 @@ export default function ContactPage() {
           {
             toA.map((d: IToA) => {
               return (
-                <SplideSlide key={d.key}>
-                  <h2>{d.key}</h2>
-                  <Form.Control as="textarea" rows={10} value={
-                    (() => {
-                      if (data_fromA == null) return '';
-                      try {
-                        const obj = data_fromA.func(content);
-                        return d.func(obj);
-                      } catch (e) {
-                        return e.message;
-                      }
-                    })()
-                  } readOnly />
-                </SplideSlide>
+                <>
+                  <SplideSlide key={d.key}>
+                    <h2>{d.key}</h2>
+                    <Form.Control as="textarea" rows={10} style={{height: 'calc(100% - 5rem)'}} className="d-block m-auto" value={
+                      (() => {
+                        if (data_fromA == null) return '';
+                        try {
+                          const obj = data_fromA.func(content);
+                          return d.func(obj);
+                        } catch (e) {
+                          return e.message;
+                        }
+                      })()
+                    } readOnly />
+                  </SplideSlide>
+                </>
               );
             })
           }
